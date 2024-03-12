@@ -16,8 +16,8 @@ def timeit(f):
         return result
     return wrap
 
-@timeit
-def hariscorners(path='./gut.jpg'):
+
+def hariscorners(path='./pg.jpg'):
     img = cv2.imread(path)
     height, width, channels = img.shape
     b = np.zeros((height, width))
@@ -63,7 +63,7 @@ def hariscorners(path='./gut.jpg'):
     trace_M = derivative_x2 + derivative_y2
 
     k = 0.05
-    T = -100000
+    T = -180000
     corners = []
 
     harris_response = det_M - k * (trace_M ** 2)
@@ -84,10 +84,10 @@ def hariscorners(path='./gut.jpg'):
     #             if is_local_maximum:
     #                 corners.append((i, j))
 
-    for i in range(1, height - 1):
-        for j in range(1, width - 1):
+    for i in range(2, height - 2):
+        for j in range(2, width - 2):
             if harris_response[i, j] < T:
-                local_min = harris_response[i - 1:i + 2, j - 1:j + 2]
+                local_min = harris_response[i - 2:i + 3, j - 2:j + 3]
                 if harris_response[i, j] == local_min.min():
                     corners.append((i, j))
 
@@ -123,4 +123,10 @@ def hariscorners(path='./gut.jpg'):
     plt.show()
 
 if __name__ == '__main__':
+    #c = fun()
+    #print(len(c))
+    #c = fun2()
+    #print(len(c))
+    #c = read_image_colors()
+    #print(len(c))
     hariscorners()
