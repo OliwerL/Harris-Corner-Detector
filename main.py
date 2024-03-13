@@ -17,7 +17,7 @@ def timeit(f):
     return wrap
 
 
-def hariscorners(path='./pg.jpg'):
+def hariscorners(path='./kotek.jpg'):
     img = cv2.imread(path)
     height, width, channels = img.shape
     b = np.zeros((height, width))
